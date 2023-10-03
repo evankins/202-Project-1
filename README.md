@@ -20,12 +20,14 @@ _A brief explanation of your project. Make sure to include details about how to 
 
 ## Make it Your Own
 
-_List out what you added to your game to make it different for you_
+- Power-ups: Changes how the player's tank behaves (speed, # bullets per shot)
+- Enemy Variety: Certain enemy tanks behave differently (speed, # bullets per shot, damage)
 
 ## Sources
 
 -   _List all project sources here –models, textures, sound clips, assets, etc._
 -   _If an asset is from the Unity store, include a link to the page and the author’s name_
+Tank Sprites: https://opengameart.org/content/2d-tanks-top-down
 
 ## Known Issues
 
