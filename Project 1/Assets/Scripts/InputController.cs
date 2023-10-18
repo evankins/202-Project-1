@@ -8,8 +8,15 @@ public class InputController : MonoBehaviour
     [SerializeField]
     MovementController movementController;
 
+
+
     public void OnMove(InputAction.CallbackContext context)
     {
         movementController.SetDirection(context.ReadValue<Vector2>());
+    }
+
+    public void OnFire(InputAction.CallbackContext context)
+    {
+        
     }
 }
