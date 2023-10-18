@@ -60,7 +60,7 @@ public class SpawnManager : Singleton<SpawnManager>
     {
         SpriteRenderer spawnedEnemy = Spawn(enemyPrefab);
         spawnedObjects.Add(spawnedEnemy);
-        //collisionManager.enemyCollidables.Add(spawnedEnemy.GetComponent<SpriteInfo>());
+        collisionManager.enemyCollidables.Add(spawnedEnemy.gameObject.GetComponent<SpriteInfo>());
 
         // Set position
         Vector2 spawnPosition;
@@ -77,7 +77,7 @@ public class SpawnManager : Singleton<SpawnManager>
     {
         SpriteRenderer spawnedBullet = Spawn(bulletPrefab);
         spawnedObjects.Add(spawnedBullet);
-        //collisionManager.enemyCollidables.Add(spawnedBullet.GetComponent<SpriteInfo>());
+        collisionManager.bulletCollidables.Add(spawnedBullet.gameObject.GetComponent<SpriteInfo>());
 
         // Set position
         spawnedBullet.transform.position = position;

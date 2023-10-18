@@ -9,8 +9,10 @@ public class CollisionManager : MonoBehaviour
     [SerializeField]
     SpriteInfo player;
 
-    List<SpriteInfo> enemyCollidables = new List<SpriteInfo>();
-    List<SpriteInfo> bulletCollidables = new List<SpriteInfo>();
+    public List<SpriteInfo> enemyCollidables = new List<SpriteInfo>();
+
+    public List<SpriteInfo> bulletCollidables = new List<SpriteInfo>();
+
     List<SpriteInfo> toBeDestroyed = new List<SpriteInfo>();
 
 

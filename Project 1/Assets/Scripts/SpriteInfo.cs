@@ -18,15 +18,21 @@ public class SpriteInfo : MonoBehaviour
         get
         {
             Vector2 rectMin;
-            rectMin.x = -(rectSize.x / 2);
-            rectMin.y = -(rectSize.y / 2);
+            rectMin.x = position.x - (rectSize.x / 2);
+            rectMin.y = position.y - (rectSize.y / 2);
             return rectMin;
         }
     }
 
     public Vector2 RectMax
     {
-        get { return rectSize; }
+        get
+        {
+            Vector2 rectMax;
+            rectMax.x = position.x + (rectSize.x / 2);
+            rectMax.y = position.y + (rectSize.y / 2);
+            return rectMax;
+        }
     }
 
 
