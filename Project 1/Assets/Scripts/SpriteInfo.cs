@@ -4,14 +4,6 @@ using UnityEngine;
 
 public class SpriteInfo : MonoBehaviour
 {
-    [SerializeField]
-    float radius = 1f;
-
-    public float Radius
-    {
-        get { return radius; }
-    }
-
     public Vector3 position
     {
         get { return transform.position; }
@@ -38,36 +30,10 @@ public class SpriteInfo : MonoBehaviour
     }
 
 
-
-    bool isColliding = false;
-
-    public bool IsColliding
-    {
-        set { isColliding = value; }
-    }
-
-    [SerializeField]
-    SpriteRenderer renderer; // don't need this in project one
-
-    // Update is called once per frame
-    void Update()
-    {
-        // don't need this for project one
-        if (isColliding)
-        {
-            renderer.color = Color.red;
-        }
-        else
-        {
-            renderer.color = Color.white;
-        }
-    }
-
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
 
-        //Gizmos.DrawWireSphere(position, radius);
         Gizmos.DrawWireCube(position, rectSize);
     }
 }

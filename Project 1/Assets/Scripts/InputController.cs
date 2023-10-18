@@ -8,7 +8,13 @@ public class InputController : MonoBehaviour
     [SerializeField]
     MovementController movementController;
 
+    public const float ShotCooldown = 0.2f;
+    float timeRemaining = ShotCooldown;
 
+    void Update()
+    {
+        timeRemaining -= Time.deltaTime;
+    }
 
     public void OnMove(InputAction.CallbackContext context)
     {
@@ -17,6 +23,10 @@ public class InputController : MonoBehaviour
 
     public void OnFire(InputAction.CallbackContext context)
     {
-        
+        if (timeRemaining < 0)
+        {
+            SpawnManager.Instance.SpawnBullet(this.transform.position);
+            timeRemaining = ShotCooldown;
+        }
     }
 }

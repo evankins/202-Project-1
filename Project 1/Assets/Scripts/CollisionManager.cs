@@ -4,15 +4,44 @@ using UnityEngine;
 
 public class CollisionManager : MonoBehaviour
 {
+    // ========== Fields ==========
+
     [SerializeField]
-    List<SpriteInfo> collidables = new List<SpriteInfo>();
+    SpriteInfo player;
+
+    List<SpriteInfo> enemyCollidables = new List<SpriteInfo>();
+    List<SpriteInfo> bulletCollidables = new List<SpriteInfo>();
+    List<SpriteInfo> toBeDestroyed = new List<SpriteInfo>();
 
 
     // Update is called once per frame
     void Update()
     {
-        // Loop through all objects for collisions
-        // when a collision change color
+        // Enemies against player and bullets
+        foreach (SpriteInfo enemy in enemyCollidables)
+        {
+            if (AABBCheck(enemy, player))
+            {
+                toBeDestroyed.Add(enemy);
+                // ===== Add damage to player =======
+            }
+
+            foreach (SpriteInfo bullet in bulletCollidables)
+            {
+                if (AABBCheck(enemy, bullet))
+                {
+                    toBeDestroyed.Add(enemy);
+                    toBeDestroyed.Add(bullet);
+                }
+            }
+        }
+
+        // Clean out any bad sprites
+        for (int i = 0; i < toBeDestroyed.Count; i++)
+        {
+            SpawnManager.Instance.DestroyObject(toBeDestroyed[i].gameObject);
+        }
+        toBeDestroyed.Clear();
     }
 
     bool AABBCheck(SpriteInfo spriteA, SpriteInfo spriteB)
@@ -29,5 +58,17 @@ public class CollisionManager : MonoBehaviour
 
 
         return false;
+    }
+
+    public void RemoveCollisions(SpriteInfo sprite)
+    {
+        if (enemyCollidables.Contains(sprite))
+        {
+            enemyCollidables.Remove(sprite);
+        }
+        else
+        {
+            bulletCollidables.Remove(sprite);
+        }
     }
 }

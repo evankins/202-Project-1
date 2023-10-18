@@ -9,8 +9,7 @@ public class MovementController : MonoBehaviour
     [SerializeField]
     float speed = 1f;
 
-    [SerializeField]
-    Vector3 direction = Vector3.right;
+    Vector3 direction = Vector3.zero;
 
     Vector3 velocity = Vector3.zero;
 
@@ -67,11 +66,5 @@ public class MovementController : MonoBehaviour
         {
             direction = newDirection.normalized;
         }
-
-        if (direction != Vector3.zero)
-        {
-            transform.rotation = Quaternion.LookRotation(Vector3.back, direction);
-        }
-
     }
 }

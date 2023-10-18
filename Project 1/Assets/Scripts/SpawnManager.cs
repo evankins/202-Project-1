@@ -7,17 +7,22 @@ public class SpawnManager : Singleton<SpawnManager>
     // ========== Fields ==========
 
     [SerializeField]
+    CollisionManager collisionManager;
+
+    [SerializeField]
     SpriteRenderer enemyPrefab;
     [SerializeField]
     SpriteRenderer bulletPrefab;
 
-    [SerializeField]
-    List<Sprite> enemyImages = new List<Sprite>();
-
-    List<SpriteRenderer> spawnedItems = new List<SpriteRenderer>();
+    List<SpriteRenderer> spawnedObjects = new List<SpriteRenderer>();
 
     public const float TimeBetweenSpawns = 5f;
     float timeRemaining = TimeBetweenSpawns;
+
+    // camera (bounds) values
+    Camera cameraObject;
+    float totalCamHeight;
+    float totalCamWidth;
 
 
     protected SpawnManager() { }
@@ -25,6 +30,10 @@ public class SpawnManager : Singleton<SpawnManager>
 
     void Start()
     {
+        cameraObject = Camera.main;
+        totalCamHeight = cameraObject.orthographicSize * 2f;
+        totalCamWidth = totalCamHeight * cameraObject.aspect;
+
         SpawnEnemy();
     }
 
@@ -50,76 +59,34 @@ public class SpawnManager : Singleton<SpawnManager>
     public void SpawnEnemy()
     {
         SpriteRenderer spawnedEnemy = Spawn(enemyPrefab);
-        spawnedItems.Add(spawnedEnemy);
+        spawnedObjects.Add(spawnedEnemy);
+        //collisionManager.enemyCollidables.Add(spawnedEnemy.GetComponent<SpriteInfo>());
 
         // Set position
         Vector2 spawnPosition;
-        spawnPosition.x = 
-        spawnPosition.y = Random.Range(-2f, 2f);
 
+        // Spawns enemies slightly off-screen
+        spawnPosition.x = (totalCamWidth / 2f) * 1.1f;
+        // Range from top to bottom of screen
+        spawnPosition.y = Random.Range(-(totalCamHeight / 2) * 0.9f, (totalCamHeight / 2) * 0.9f);
 
         spawnedEnemy.transform.position = spawnPosition;
-
-        // Picking a random animal
-        float randValue = Random.value;
-
-        #region Random
-        /*
-        // Elephant: 25%
-        if (randValue < 0.25f)
-        {
-            spawnedItems[i].sprite = enemyImages[0];
-        }
-        // Turtle: 20%
-        else if (randValue < 0.45f)
-        {
-            spawnedItems[i].sprite = enemyImages[1];
-        }
-        // Snail: 15%
-        else if (randValue < 0.60f)
-        {
-            spawnedItems[i].sprite = enemyImages[2];
-        }
-        // Octopus: 10%
-        else if (randValue < 0.70f)
-        {
-            spawnedItems[i].sprite = enemyImages[3];
-        }
-        // Kangaroo: 30%
-        else
-        {
-            spawnedItems[i].sprite = enemyImages[4];
-        }
-        */
-        #endregion
-
     }
 
-    float Gaussian(float mean, float stdDev)
+    public void SpawnBullet(Vector2 position)
     {
-        float val1 = Random.Range(0f, 1f);
-        float val2 = Random.Range(0f, 1f);
+        SpriteRenderer spawnedBullet = Spawn(bulletPrefab);
+        spawnedObjects.Add(spawnedBullet);
+        //collisionManager.enemyCollidables.Add(spawnedBullet.GetComponent<SpriteInfo>());
 
-        float gaussValue =
-                Mathf.Sqrt(-2.0f * Mathf.Log(val1)) *
-                Mathf.Sin(2.0f * Mathf.PI * val2);
-
-        return mean + stdDev * gaussValue;
+        // Set position
+        spawnedBullet.transform.position = position;
     }
 
-    public void DestroyAnimals()
+    public void DestroyObject(GameObject obj)
     {
-        // for better code, look up Unity object pooling
-        // Eric Baker has a public GitHub Schump that uses object pooling in the SpawnManager
-        // * good to show off for portfolios
-
-        foreach (SpriteRenderer animal in spawnedItems)
-        {
-            // if you just do animal, you only destroy the spriteRenderer
-            // any component can reference the GameObject it's attached to
-            Destroy(animal.gameObject);
-        }
-
-        spawnedItems.Clear();
+        spawnedObjects.Remove(obj.GetComponent<SpriteRenderer>());
+        collisionManager.RemoveCollisions(obj.GetComponent<SpriteInfo>());
+        Destroy(obj);
     }
 }
