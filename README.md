@@ -25,6 +25,6 @@ Controls
 
 ## Sources
 
-Tank Pack (80+) by Kenney: https://opengameart.org/content/tank-pack-80
+- Tank Pack (80+) by Kenney: https://opengameart.org/content/tank-pack-80
 
-Desert Background by hassekf: https://opengameart.org/content/tower-defense-sand-background
+- Desert Background by hassekf: https://opengameart.org/content/tower-defense-sand-background
