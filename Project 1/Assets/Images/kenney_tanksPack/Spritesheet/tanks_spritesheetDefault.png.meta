@@ -1047,7 +1047,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bullet_Enemy
+      name: Bullet
       rect:
         serializedVersion: 2
         x: 543
@@ -1404,7 +1404,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Bullet
+      name: unused
       rect:
         serializedVersion: 2
         x: 398
@@ -2023,8 +2023,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Bullet: -997357025
-      Bullet_Enemy: 829921058
+      Bullet: 829921058
       Enemy_Base: -886150545
       Howitzer_Missile: -1405954739
       Player_Base: 289677907
@@ -2113,6 +2112,7 @@ TextureImporter:
       tanks_spritesheetDefault_88: -1195187423
       tanks_spritesheetDefault_89: -783781622
       tanks_spritesheetDefault_9: -1468903780
+      unused: -997357025
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
