@@ -15,7 +15,8 @@ public class EnemyFire : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        timeRemaining = shotCooldown;
+        // no matter the cooldown, tanks shoot shortly after spawning
+        timeRemaining = 1f;
     }
 
 
