@@ -9,7 +9,7 @@
 
 ### Description
 
-This is a shoot 'em up a la Galaga or Space Invaders. This was made in the Unity engine using C#.
+This is a shoot 'em up a la Galaga or Space Invaders. This school project was made in the Unity engine using C#.
 
 The player controls a tank as enemies approach from the right. The game will only end once you die.
 
