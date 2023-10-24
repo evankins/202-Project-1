@@ -6,15 +6,19 @@ public class CollisionManager : MonoBehaviour
 {
     // ========== Fields ==========
 
+    [SerializeField] 
+    UIManager uiManager;
+
     [SerializeField]
     SpriteInfo player;
 
     public List<SpriteInfo> enemyCollidables = new List<SpriteInfo>();
 
-    public List<SpriteInfo> bulletCollidables = new List<SpriteInfo>();
+    public List<SpriteInfo> playerBulletCollidables = new List<SpriteInfo>();
+
+    public List<SpriteInfo> enemyBulletCollidables = new List<SpriteInfo>();
 
     List<SpriteInfo> toBeDestroyed = new List<SpriteInfo>();
-
 
     // Update is called once per frame
     void Update()
@@ -25,16 +29,27 @@ public class CollisionManager : MonoBehaviour
             if (AABBCheck(enemy, player))
             {
                 toBeDestroyed.Add(enemy);
-                // ===== Add damage to player =======
+                uiManager.DecreaseLives();
             }
 
-            foreach (SpriteInfo bullet in bulletCollidables)
+            foreach (SpriteInfo bullet in playerBulletCollidables)
             {
                 if (AABBCheck(enemy, bullet))
                 {
                     toBeDestroyed.Add(enemy);
                     toBeDestroyed.Add(bullet);
+                    uiManager.IncreaseScore(100);
                 }
+            }
+        }
+
+        // Enemy bullets against player
+        foreach (SpriteInfo bullet in enemyBulletCollidables)
+        {
+            if (AABBCheck(bullet, player))
+            {
+                toBeDestroyed.Add(bullet);
+                uiManager.DecreaseLives();
             }
         }
 
@@ -68,9 +83,13 @@ public class CollisionManager : MonoBehaviour
         {
             enemyCollidables.Remove(sprite);
         }
+        else if (enemyBulletCollidables.Contains(sprite))
+        {
+            enemyBulletCollidables.Remove(sprite);
+        }
         else
         {
-            bulletCollidables.Remove(sprite);
+            playerBulletCollidables.Remove(sprite);
         }
     }
 }

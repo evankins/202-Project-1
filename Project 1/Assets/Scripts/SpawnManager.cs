@@ -10,14 +10,21 @@ public class SpawnManager : Singleton<SpawnManager>
     CollisionManager collisionManager;
 
     [SerializeField]
-    SpriteRenderer enemyPrefab;
+    SpriteRenderer enemyBasePrefab;
+    [SerializeField]
+    SpriteRenderer enemyFastPrefab;
+    [SerializeField]
+    SpriteRenderer enemyHowitzerPrefab;
     [SerializeField]
     SpriteRenderer bulletPrefab;
 
+    
+
     List<SpriteRenderer> spawnedObjects = new List<SpriteRenderer>();
 
-    public const float TimeBetweenSpawns = 5f;
-    float timeRemaining = TimeBetweenSpawns;
+    [SerializeField]
+    float timeBetweenSpawns;
+    float timeRemaining;
 
     // camera (bounds) values
     Camera cameraObject;
@@ -34,20 +41,20 @@ public class SpawnManager : Singleton<SpawnManager>
         totalCamHeight = cameraObject.orthographicSize * 2f;
         totalCamWidth = totalCamHeight * cameraObject.aspect;
 
+        timeRemaining = timeBetweenSpawns;
+
         SpawnEnemy();
     }
 
 
     void Update()
     {
-        if (timeRemaining > 0)
-        {
-            timeRemaining -= Time.deltaTime;
-        }
-        else
+        timeRemaining -= Time.deltaTime;
+
+        if (timeRemaining <= 0)
         {
             SpawnEnemy();
-            timeRemaining = TimeBetweenSpawns;
+            timeRemaining = timeBetweenSpawns;
         }
     }
 
@@ -58,7 +65,27 @@ public class SpawnManager : Singleton<SpawnManager>
 
     public void SpawnEnemy()
     {
-        SpriteRenderer spawnedEnemy = Spawn(enemyPrefab);
+        SpriteRenderer spawnedEnemy;
+
+        // Select a random enemy
+        float randValue = Random.value;
+        // Base: 60%
+        if (randValue < 0.60f)
+        {
+            spawnedEnemy = Spawn(enemyBasePrefab);
+        }
+        // Fast: 20%
+        else if (randValue < 0.80f)
+        {
+            spawnedEnemy = Spawn(enemyFastPrefab);
+        }
+        // Howitzer: 20%
+        else
+        {
+            spawnedEnemy = Spawn(enemyHowitzerPrefab);
+        }
+
+
         spawnedObjects.Add(spawnedEnemy);
         collisionManager.enemyCollidables.Add(spawnedEnemy.gameObject.GetComponent<SpriteInfo>());
 
@@ -73,13 +100,24 @@ public class SpawnManager : Singleton<SpawnManager>
         spawnedEnemy.transform.position = spawnPosition;
     }
 
-    public void SpawnBullet(Vector2 position)
+    public void SpawnBullet(Vector3 position, SpriteRenderer bullet, bool isEnemyBullet)
     {
-        SpriteRenderer spawnedBullet = Spawn(bulletPrefab);
+        SpriteRenderer spawnedBullet = Spawn(bullet);
         spawnedObjects.Add(spawnedBullet);
-        collisionManager.bulletCollidables.Add(spawnedBullet.gameObject.GetComponent<SpriteInfo>());
+
+        // enemy bullets must be added to a different list
+        if (isEnemyBullet)
+        {
+            collisionManager.enemyBulletCollidables.Add(spawnedBullet.gameObject.GetComponent<SpriteInfo>());
+        }
+        else
+        {
+            collisionManager.playerBulletCollidables.Add(spawnedBullet.gameObject.GetComponent<SpriteInfo>());
+        }
 
         // Set position
+        // Bullets go behind tanks
+        position.z += 5f;
         spawnedBullet.transform.position = position;
     }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    Vector3 objectPosition = Vector3.zero;
+    Vector3 objectPosition;
 
     [SerializeField]
     float speed = 1f;

@@ -207,7 +207,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tanks_spritesheetDefault_4
+      name: Tank_Fast
       rect:
         serializedVersion: 2
         x: 348
@@ -774,7 +774,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tanks_spritesheetDefault_31
+      name: Howitzer_Missile
       rect:
         serializedVersion: 2
         x: 490
@@ -1047,7 +1047,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tanks_spritesheetDefault_44
+      name: Bullet_Enemy
       rect:
         serializedVersion: 2
         x: 543
@@ -1173,7 +1173,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: tanks_spritesheetDefault_50
+      name: Tank_Howitzer
       rect:
         serializedVersion: 2
         x: 93
@@ -2024,8 +2024,12 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       Bullet: -997357025
+      Bullet_Enemy: 829921058
       Enemy_Base: -886150545
+      Howitzer_Missile: -1405954739
       Player_Base: 289677907
+      Tank_Fast: -2051519971
+      Tank_Howitzer: 453018151
       tanks_spritesheetDefault_1: -1984655211
       tanks_spritesheetDefault_10: 31761425
       tanks_spritesheetDefault_11: -151937016
@@ -2049,7 +2053,6 @@ TextureImporter:
       tanks_spritesheetDefault_29: 666875936
       tanks_spritesheetDefault_3: -1510804632
       tanks_spritesheetDefault_30: 361975827
-      tanks_spritesheetDefault_31: -1405954739
       tanks_spritesheetDefault_32: -1112881836
       tanks_spritesheetDefault_33: -742330326
       tanks_spritesheetDefault_34: 1474704379
@@ -2058,19 +2061,16 @@ TextureImporter:
       tanks_spritesheetDefault_37: 1145354181
       tanks_spritesheetDefault_38: -985570412
       tanks_spritesheetDefault_39: 770616637
-      tanks_spritesheetDefault_4: -2051519971
       tanks_spritesheetDefault_40: -1329227573
       tanks_spritesheetDefault_41: -1740701744
       tanks_spritesheetDefault_42: 724485430
       tanks_spritesheetDefault_43: -1620725752
-      tanks_spritesheetDefault_44: 829921058
       tanks_spritesheetDefault_45: -478921792
       tanks_spritesheetDefault_46: -1023549727
       tanks_spritesheetDefault_47: -1210422999
       tanks_spritesheetDefault_48: -1052665956
       tanks_spritesheetDefault_49: -528369461
       tanks_spritesheetDefault_5: -1158316727
-      tanks_spritesheetDefault_50: 453018151
       tanks_spritesheetDefault_51: -1053397084
       tanks_spritesheetDefault_52: 357566960
       tanks_spritesheetDefault_53: 1135329367

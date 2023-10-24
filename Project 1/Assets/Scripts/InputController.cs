@@ -8,8 +8,17 @@ public class InputController : MonoBehaviour
     [SerializeField]
     MovementController movementController;
 
-    public const float ShotCooldown = 0.2f;
-    float timeRemaining = ShotCooldown;
+    [SerializeField]
+    SpriteRenderer playerBulletPrefab;
+
+    [SerializeField]
+    float shotCooldown = 0.3f;
+    float timeRemaining;
+
+    void Start()
+    {
+        timeRemaining = shotCooldown;
+    }
 
     void Update()
     {
@@ -23,10 +32,10 @@ public class InputController : MonoBehaviour
 
     public void OnFire(InputAction.CallbackContext context)
     {
-        if (timeRemaining < 0)
+        if (timeRemaining <= 0)
         {
-            SpawnManager.Instance.SpawnBullet(this.transform.position);
-            timeRemaining = ShotCooldown;
+            SpawnManager.Instance.SpawnBullet(this.transform.position, playerBulletPrefab, false);
+            timeRemaining = shotCooldown;
         }
     }
 }
